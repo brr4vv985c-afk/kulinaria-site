@@ -1,0 +1,5 @@
+{
+  "enabledPlugins": {
+    "omniroute@claude-plugins-official": true
+  }
+}
