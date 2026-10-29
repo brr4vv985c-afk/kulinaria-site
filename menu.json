@@ -1,0 +1,45 @@
+{
+  "_инструкция": "Меняйте блюда и цены здесь. price — цена в рублях (число), weight — вес/порция (текст), photo — путь к фото в папке images (пока заглушка), description — короткое описание (можно оставить пустым). Чтобы скрыть блюдо, поставьте \"available\": false.",
+  "categories": [
+    {
+      "id": "pirogi",
+      "title": "Пироги",
+      "items": [
+        { "name": "Пирог с капустой и яйцом", "price": 650, "weight": "1 кг", "description": "Дрожжевое тесто, тушёная капуста, яйцо", "photo": "images/placeholder.svg" },
+        { "name": "Пирог с курицей и картофелем", "price": 750, "weight": "1 кг", "description": "Сочная курица, картофель, лук", "photo": "images/placeholder.svg" },
+        { "name": "Осетинский пирог с сыром", "price": 700, "weight": "800 г", "description": "Тонкое тесто, сулугуни, зелень", "photo": "images/placeholder.svg" },
+        { "name": "Пирог с яблоками", "price": 600, "weight": "1 кг", "description": "Песочное тесто, яблоки, корица", "photo": "images/placeholder.svg" }
+      ]
+    },
+    {
+      "id": "salaty",
+      "title": "Салаты",
+      "items": [
+        { "name": "Оливье", "price": 280, "weight": "300 г", "description": "Классический, с докторской колбасой", "photo": "images/placeholder.svg" },
+        { "name": "Селёдка под шубой", "price": 300, "weight": "300 г", "description": "", "photo": "images/placeholder.svg" },
+        { "name": "Винегрет", "price": 220, "weight": "300 г", "description": "С квашеной капустой", "photo": "images/placeholder.svg" },
+        { "name": "Цезарь с курицей", "price": 350, "weight": "250 г", "description": "Курица, романо, сухарики, соус", "photo": "images/placeholder.svg" }
+      ]
+    },
+    {
+      "id": "vtorye",
+      "title": "Вторые блюда",
+      "items": [
+        { "name": "Котлеты домашние с пюре", "price": 380, "weight": "350 г", "description": "Две котлеты из говядины и свинины", "photo": "images/placeholder.svg" },
+        { "name": "Голубцы", "price": 420, "weight": "400 г", "description": "4 шт., со сметаной", "photo": "images/placeholder.svg" },
+        { "name": "Плов с говядиной", "price": 400, "weight": "400 г", "description": "", "photo": "images/placeholder.svg" },
+        { "name": "Пельмени ручной лепки", "price": 550, "weight": "1 кг", "description": "Замороженные, говядина и свинина", "photo": "images/placeholder.svg" }
+      ]
+    },
+    {
+      "id": "vypechka",
+      "title": "Выпечка",
+      "items": [
+        { "name": "Пирожки с картошкой", "price": 60, "weight": "1 шт., 90 г", "description": "", "photo": "images/placeholder.svg" },
+        { "name": "Беляши", "price": 90, "weight": "1 шт., 120 г", "description": "", "photo": "images/placeholder.svg" },
+        { "name": "Сырники", "price": 320, "weight": "5 шт.", "description": "Со сметаной", "photo": "images/placeholder.svg" },
+        { "name": "Медовик", "price": 1400, "weight": "1 кг", "description": "Торт целиком, заказ за сутки", "photo": "images/placeholder.svg" }
+      ]
+    }
+  ]
+}
