@@ -73,6 +73,8 @@ else:
 # Телефон: все tel:-ссылки и wa.me должны указывать на один номер
 tels = set(re.findall(r'tel:\+?(\d+)', html + js))
 was = set(re.findall(r'wa\.me/(\d+)', html))
+was |= set(re.findall(r"whatsapp: '(\d+)'", js))
+tels |= set(re.findall(r"phone: '\+?(\d+)'", js))
 numbers = tels | was
 if len(numbers) > 1:
     errors.append(f'разные номера телефона в ссылках tel:/wa.me: {", ".join(sorted(numbers))}')

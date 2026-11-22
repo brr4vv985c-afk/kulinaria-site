@@ -83,6 +83,7 @@
         <p class="hero__place">Балашиха · Новое Павлино</p>
         <h1 class="hero__title">А ещё есть?</h1>
         <p class="hero__lead">Домашняя кулинария: пироги, салаты, вторые блюда и выпечка. Готовим как для своих — каждый день свежее.</p>
+        <p class="hero__hint">Соберите заказ на сайте — и отправьте его в WhatsApp или Telegram в пару касаний.</p>
         <div class="hero__actions">
           <button class="btn btn--primary btn--big" type="button" data-order>Заказать</button>
           <a class="btn btn--ghost btn--big" href="#menu">Смотреть меню</a>
@@ -110,9 +111,9 @@
       <div class="wrap">
         <h2 class="section__title" id="how-title">Как заказать</h2>
         <ol class="steps">
-          <li><b>Выберите блюда</b> в меню выше.</li>
-          <li><b>Напишите или позвоните</b> — в Telegram, WhatsApp или по телефону. Назовите блюда, количество и удобное время.</li>
-          <li><b>Заберите заказ</b> сами или получите с доставкой.</li>
+          <li><b>Выберите блюда</b> — нажмите «+» у всего, что хотите заказать.</li>
+          <li><b>Откройте корзину</b> внизу экрана, выберите самовывоз или доставку и удобное время.</li>
+          <li><b>Отправьте заказ</b> в WhatsApp или Telegram — список и сумма подставятся сами. Мы подтвердим заказ в ответ. Можно и просто позвонить.</li>
         </ol>
         <div class="cards">
           <div class="card">
@@ -164,21 +165,69 @@
     </div>
   </footer>
 
-  <!-- Закреплённая кнопка на телефоне -->
+  <!-- Закреплённая кнопка: «Заказать» или корзина с суммой -->
   <div class="sticky-order">
-    <button class="btn btn--primary btn--big" type="button" data-order>Заказать</button>
+    <button class="btn btn--primary btn--big" type="button" data-order><span data-order-label>Заказать</span></button>
   </div>
 
-  <!-- Окно выбора способа заказа -->
-  <dialog class="order-dialog" id="order-dialog" aria-labelledby="order-title">
-    <form method="dialog">
-      <h2 id="order-title">Как вам удобнее?</h2>
-      <p>Ежедневно 9:00–21:00</p>
-      <a class="btn btn--primary btn--big" href="tel:+79000000000" data-goal="call">Позвонить</a>
-      <a class="btn btn--tg btn--big" href="https://t.me/aeshcheest" target="_blank" rel="noopener" data-goal="telegram">Написать в Telegram</a>
-      <a class="btn btn--wa btn--big" href="https://wa.me/79000000000?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5!%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%81%D0%B4%D0%B5%D0%BB%D0%B0%D1%82%D1%8C%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7." target="_blank" rel="noopener" data-goal="whatsapp">Написать в WhatsApp</a>
-      <button class="btn btn--link" value="close">Закрыть</button>
-    </form>
+  <!-- Окно заказа: корзина, способ получения, отправка -->
+  <dialog class="order-dialog is-empty" id="order-dialog" aria-labelledby="order-title">
+    <div class="sheet">
+      <div class="sheet__head">
+        <h2 id="order-title">Ваш заказ</h2>
+        <button class="sheet__close" type="button" data-close aria-label="Закрыть">×</button>
+      </div>
+
+      <div class="cart-empty">
+        <p>Пока ничего не выбрано. Добавьте блюда кнопкой «+» в меню — или просто позвоните или напишите нам, подскажем, что есть сегодня.</p>
+        <a class="btn btn--ghost" href="#menu" data-close>Открыть меню</a>
+      </div>
+
+      <div class="cart-full">
+        <ul class="cart-list" id="cart-list"></ul>
+
+        <dl class="cart-sum" aria-live="polite">
+          <div><dt>Блюда</dt><dd id="cart-subtotal">0 ₽</dd></div>
+          <div id="cart-delivery-row" hidden><dt>Доставка</dt><dd id="cart-delivery">—</dd></div>
+          <div class="cart-sum__total"><dt>Итого</dt><dd id="cart-total">0 ₽</dd></div>
+        </dl>
+        <p class="cart-hint" id="cart-hint" hidden></p>
+
+        <form class="order-form" id="order-form" onsubmit="return false">
+          <fieldset class="segmented">
+            <legend>Как получить</legend>
+            <label><input type="radio" name="mode" value="pickup" checked><span>Самовывоз</span></label>
+            <label><input type="radio" name="mode" value="delivery"><span>Доставка</span></label>
+          </fieldset>
+          <label class="field" id="field-address" hidden>
+            <span>Адрес доставки</span>
+            <input name="address" type="text" autocomplete="street-address" placeholder="Корпус, подъезд, квартира">
+          </label>
+          <label class="field">
+            <span>Когда удобно</span>
+            <input name="time" type="text" placeholder="Например, сегодня к 18:00">
+          </label>
+          <label class="field">
+            <span>Ваше имя</span>
+            <input name="name" type="text" autocomplete="given-name" placeholder="Как к вам обращаться">
+          </label>
+          <label class="field">
+            <span>Комментарий</span>
+            <textarea name="comment" rows="2" placeholder="Пожелания к заказу"></textarea>
+          </label>
+        </form>
+      </div>
+
+      <div class="sheet__actions">
+        <p class="sheet__label cart-full">Отправьте заказ — мы подтвердим его и время в ответ</p>
+        <a class="btn btn--wa btn--big" href="https://wa.me/79000000000" target="_blank" rel="noopener" data-send="whatsapp" data-goal="whatsapp"><span class="cart-full">Отправить в WhatsApp</span><span class="cart-empty">Написать в WhatsApp</span></a>
+        <a class="btn btn--tg btn--big" href="https://t.me/aeshcheest" target="_blank" rel="noopener" data-send="telegram" data-goal="telegram"><span class="cart-full">Отправить в Telegram</span><span class="cart-empty">Написать в Telegram</span></a>
+        <a class="btn btn--ghost btn--big" href="tel:+79000000000" data-goal="call">Позвонить +7 900 000-00-00</a>
+        <p class="sheet__note">Принимаем заказы ежедневно с 9:00 до 21:00</p>
+      </div>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </div>
   </dialog>
 
   <script src="js/main.js" defer></script>
